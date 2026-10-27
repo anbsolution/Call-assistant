@@ -48,3 +48,13 @@
 .qa-summary-output h4{font-size:13px;margin:0 0 7px}.qa-summary-output p{font-size:12px;line-height:1.65;white-space:pre-line;margin:0;color:#435d4b}
 .qa-session-privacy{font-size:11px;line-height:1.5;color:#718276;margin:10px 0 0}
 @media(max-width:420px){.qa-session{padding:11px}.qa-session-head h3{font-size:16px}.qa-session-actions{display:grid;grid-template-columns:1fr 1fr}.qa-session-button{padding:10px 7px}}
+
+/* v3.8 local call timeline */
+.qa-timeline{margin:12px 0;padding:11px;border:1px solid #d5e8dc;border-radius:11px;background:rgba(255,255,255,.76)}
+.qa-timeline-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.qa-timeline-head h4{margin:0;font-size:13px;color:#245d3b}
+.qa-timeline-head span{min-width:22px;padding:3px 7px;border-radius:20px;background:#e5f8eb;color:#237646;text-align:center;font-size:11px;font-weight:800}
+.qa-timeline ol{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;max-height:220px;overflow:auto}
+.qa-timeline li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;padding:7px 8px;border-radius:8px;background:#f5fbf7;font-size:12px;line-height:1.45;color:#294d36}
+.qa-timeline time{font-size:11px;font-variant-numeric:tabular-nums;color:#688171}
+.qa-timeline p{margin:8px 0 0;font-size:11px;color:#718276}

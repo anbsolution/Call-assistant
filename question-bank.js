@@ -658,6 +658,11 @@
         <span data-qa="progress-fill"></span>
       </div>
       <p class="qa-progress-label" data-qa="progress-label"></p>
+      <section class="qa-timeline" aria-label="Call interaction timeline">
+        <div class="qa-timeline-head"><h4 data-qa="timeline-title"></h4><span data-qa="timeline-count">0</span></div>
+        <ol data-qa="timeline-list"></ol>
+        <p data-qa="timeline-empty"></p>
+      </section>
       <label class="qa-session-notes-label" for="z7-call-notes" data-qa="notes-label"></label>
       <textarea id="z7-call-notes" data-qa="session-notes" rows="3" maxlength="1200"></textarea>
       <div class="qa-session-actions">
@@ -725,6 +730,22 @@
     $("reset-session").textContent = t.reset;
     $("summary-heading").textContent = t.summary;
     $("session-privacy").textContent = t.privacy;
+    const timeline = $("timeline-list");
+    const events = session.reactions.slice(-12).slice().reverse();
+    $("timeline-title").textContent = lang === "hi" ? "बातचीत की टाइमलाइन" : lang === "hinglish" ? "Conversation timeline" : "Call timeline";
+    $("timeline-count").textContent = String(session.reactions.length);
+    $("timeline-empty").textContent = events.length ? "" : (lang === "hi" ? "Customer response select karne par activity yahan dikhegi." : lang === "hinglish" ? "Customer response select karne par activity yahan dikhegi." : "Select a customer response to record the interaction here.");
+    timeline.replaceChildren();
+    events.forEach(event => {
+      const li = document.createElement("li");
+      const time = document.createElement("time");
+      const detail = document.createElement("span");
+      time.textContent = event.time || "";
+      const reactionText = t[event.key] || event.key;
+      detail.textContent = `${event.question.q[lang] || event.question.q.en} — ${reactionText}`;
+      li.append(time, detail);
+      timeline.append(li);
+    });
   }
   function recordQuestion(item) {
     if (!item) return;
@@ -737,7 +758,8 @@
     recordQuestion(selected);
     session.lastQuestion = selected;
     session.lastReaction = key;
-    session.reactions.push({question: session.lastQuestion, key});
+    session.reactions.push({question: session.lastQuestion, key, time: new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"})});
+    if (session.reactions.length > 100) session.reactions.shift();
     renderSessionProgress();
   }
 
