@@ -1,4 +1,4 @@
-const CACHE = "z7-support-v22";
+const CACHE = "z7-support-v23";
 const FILES = ["./", "./index.html", "./styles.css", "./app.js", "./pro.js", "./manifest.webmanifest", "./icon.svg"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)));
