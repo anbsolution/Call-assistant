@@ -29,14 +29,14 @@
       ]
     },
     busy: {
-      en: "That’s okay. I’ll end the call now. You can check official information later if you want. Thank you for your time. Goodbye.",
-      hi: "Theek hai. Main abhi call end kar deta/deti hoon. Agar aap chahein toh baad mein official information check kar sakte hain. Aapke time ke liye thank you. Goodbye.",
-      options: [["end", "End call", "Call end karein"]]
+      en: "I understand you’re busy. What time would be convenient for a callback? If you prefer not to continue, that is completely fine.",
+      hi: "Samajh gaya/gayi, aap abhi busy hain. Callback ke liye kaunsa samay convenient rahega? Agar aap baat aage nahi badhana chahte, toh bilkul theek hai.",
+      options: [["purpose", "Continue now", "Abhi baat jaari rakhein"], ["no", "Not interested", "Interest nahi hai"], ["end", "Customer ended the call", "Customer ne call end ki"]]
     },
     no: {
-      en: "No problem. I understand, and I won’t take more of your time. Thank you for speaking with me. Have a good day. Goodbye.",
-      hi: "Koi baat nahi, main samajh gaya/gayi. Main aapka aur time nahi loonga/loongi. Baat karne ke liye thank you. Aapka din achha rahe. Goodbye.",
-      options: [["end", "End call", "Call end karein"]]
+      en: "I understand. Thank you for letting me know. I won’t continue with the offer or request. You may end the call whenever you’re ready.",
+      hi: "Main samajh gaya/gayi. Batane ke liye shukriya. Main is request ko aage nahi badhaunga/badhaungi. Jab aap chahein, call end kar sakte hain.",
+      options: [["purpose", "Customer wants to continue with support", "Customer support jaari rakhna chahte hain"], ["end", "Customer ended the call", "Customer ne call end ki"]]
     },
     login: {
       en: "For safety, please open the official Z7 app yourself or type the verified website address directly. Check that the website is genuine before logging in. Never tell me or anyone else your password or OTP.",
@@ -69,18 +69,18 @@
       options: [["purpose", "Back to support options", "Support options par wapas"]]
     },
     optout: {
-      en: "I understand your request. I’ll follow the approved process to record your request to stop marketing calls. Thank you for letting me know. Goodbye.",
-      hi: "Main aapki request samajh gaya/gayi. Marketing calls band karne ki request record karne ke liye approved process follow karunga/karungi. Batane ke liye thank you. Goodbye.",
-      options: [["end", "End call", "Call end karein"]]
+      en: "I understand your request. I’ll follow the approved process to record your request to stop marketing calls. Is there anything else about your support request you’d like me to note?",
+      hi: "Main aapki request samajh gaya/gayi. Marketing calls band karne ki request record karne ke liye approved process follow karunga/karungi. Kya aapki support request ke baare mein aur kuch note karna hai?",
+      options: [["purpose", "Another support question", "Ek aur support sawal"], ["end", "Customer ended the call", "Customer ne call end ki"]]
     },
     closing: {
-      en: "Thank you for your time. Please use only verified information from the official app or website. If you need account help, contact official customer support. Have a good day. Goodbye.",
-      hi: "Aapke time ke liye thank you. Sirf official app ya website ki verified information use karein. Account help ke liye official customer support se contact karein. Aapka din achha rahe. Goodbye.",
-      options: [["end", "End call", "Call end karein"]]
+      en: "Thank you for your time. Please use only verified information from the official app or website. Is there anything else I can help clarify?",
+      hi: "Aapke time ke liye shukriya. Sirf official app ya website ki verified information use karein. Kya main kisi aur baat mein madad ya clarification de sakta/sakti hoon?",
+      options: [["purpose", "Another support question", "Ek aur support sawal"], ["end", "Customer ended the call", "Customer ne call end ki"]]
     },
     end: {
-      en: "Call flow completed. Respect the customer’s decision and any request not to be contacted again.",
-      hi: "Call flow complete ho gaya. Customer ke decision aur dobara contact na karne ki request ka respect karein.",
+      en: "Customer selected that the call has ended. Respect the customer’s decision and any request not to be contacted again.",
+      hi: "Customer ne call end karne ka option select kiya. Customer ke decision aur dobara contact na karne ki request ka respect karein.",
       options: [["start", "Start a new call", "Nayi call shuru karein"]]
     }
   };
@@ -94,7 +94,7 @@
   host.innerHTML = `
     <div class="call-flow-head">
       <div><p class="eyebrow">INTERACTIVE CALL SCRIPT</p><h2>Z7 Calling Flow</h2></div>
-      <span class="flow-version">v2.6</span>
+      <span class="flow-version">v2.7</span>
     </div>
     <p class="flow-step" id="flow-step">Step 1</p>
     <div class="flow-script" id="flow-script" aria-live="polite"></div>
@@ -102,7 +102,6 @@
     <div class="flow-options" id="flow-options"></div>
     <div class="flow-actions">
       <button type="button" id="flow-back" class="secondary">← Back</button>
-      <button type="button" id="flow-copy">Copy script</button>
       <button type="button" id="flow-reset" class="secondary">Restart</button>
     </div>
     <p class="flow-status" id="flow-status" role="status"></p>
@@ -118,7 +117,6 @@
   const text = $("#flow-script");
   const options = $("#flow-options");
   const back = $("#flow-back");
-  const copy = $("#flow-copy");
   const reset = $("#flow-reset");
   const status = $("#flow-status");
 
@@ -167,34 +165,13 @@
     render();
   });
 
-  copy.addEventListener("click", async () => {
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(script[current][lang]);
-      } else {
-        const area = document.createElement("textarea");
-        area.value = script[current][lang];
-        area.style.position = "fixed";
-        area.style.opacity = "0";
-        document.body.append(area);
-        area.select();
-        const ok = document.execCommand("copy");
-        area.remove();
-        if (!ok) throw new Error("Copy unavailable");
-      }
-      status.textContent = lang === "hi" ? "Script copy ho gaya." : "Script copied.";
-    } catch {
-      status.textContent = lang === "hi"
-        ? "Copy nahi ho saka. Text ko manually select karein."
-        : "Copy unavailable. Please select and copy the text manually.";
-    }
-  });
-
   const languageToggle = document.querySelector("#language-toggle");
   if (languageToggle) {
     languageToggle.addEventListener("click", () => {
-      lang = lang === "en" ? "hi" : "en";
-      render();
+      queueMicrotask(() => {
+        try { lang = localStorage.getItem(LANG_KEY) === "hi" ? "hi" : "en"; } catch {}
+        render();
+      });
     });
   }
 

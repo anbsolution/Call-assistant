@@ -1,6 +1,6 @@
-# Z7 Customer Support Assistant v2.4
+# Z7 Customer Support Assistant v2.7
 
-A mobile-friendly support guide with selectable response templates.
+Mobile-friendly bilingual support guide and customer-led call-flow UI.
 
 ## Features
 - Login and account access guidance
@@ -9,38 +9,19 @@ A mobile-friendly support guide with selectable response templates.
 - Privacy request guidance
 - Complaint escalation
 - Customer call opt-out guidance
-- Copyable response templates
+- Interactive call script with selectable customer responses
+- Back and restart controls; no script/response copy buttons
 - PWA manifest and service-worker offline cache
+
+## v2.7 — Customer-led call flow
+- Removed copy-script and copy-response buttons from the UI
+- Busy and not-interested branches do not automatically mark the call ended
+- Explicit “Customer ended the call” option controls the call-ended state in this script UI
+- Hindi/English flow follows the existing interface language toggle
+- No passwords, OTPs or customer conversation data stored
 
 ## Run locally
 Open `index.html` in a browser. For service-worker and installable PWA features, serve the files over HTTPS or localhost.
 
 ## Safety
-Never ask customers to share passwords, OTPs, recovery codes, or full payment credentials. Verify requests through official channels.
-
-
-## v2.4
-- Consistent version labels
-- Persistent unique-topic statistics
-- Separate recent-topic history (up to three topics)
-- Clear recent history without resetting viewing statistics
-
-
-## v2.4
-- Hindi/English interface toggle and Hindi support responses
-- Device-local favorite topics
-- Favorite, recent-history, and viewed-topic lists contain topic IDs only
-
-
-## v2.4
-- Hindi/English interface toggle and Hindi support responses
-- Device-local favorite topics
-- Favorite, recent-history, and viewed-topic lists contain topic IDs only
-
- 
-## v2.6 — Interactive Calling Flow
-- Branching call script based on the original Simple English + Hinglish support sections
-- Customer can choose the next response path
-- Back, restart and copy-script controls
-- Login, account support, password reset, suspicious links, fraud safety and opt-out branches
-- No passwords, OTPs or customer conversation data stored
+Never ask customers to share passwords, OTPs, recovery codes, UPI PINs, or payment credentials. Honor a customer’s request to stop contact and follow the approved process for recording it.
