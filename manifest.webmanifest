@@ -1,10 +1,10 @@
 {
-  "name": "Z7 Customer Support Assistant",
-  "short_name": "Z7 Support",
+  "name": "Calling Assistant",
+  "short_name": "Calling Assistant",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#0b1120",
-  "theme_color": "#101827",
-  "description": "Customer support guides and response templates",
+  "background_color": "#f4faf6",
+  "theme_color": "#f4faf6",
+  "description": "Calling Assistant support guides and call workflow",
   "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]
 }
