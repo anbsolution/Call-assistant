@@ -100,7 +100,7 @@
           <option value="en">English</option><option value="hi">हिन्दी</option><option value="hinglish">Hinglish</option>
         </select>
       </label>
-      <span class="flow-version">v2.8</span>
+      <span class="flow-version">v2.9</span>
     </div>
     <p class="flow-step" id="flow-step">Step 1</p>
     <div class="flow-script" id="flow-script" aria-live="polite"></div>

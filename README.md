@@ -1,4 +1,4 @@
-# Z7 Customer Support Assistant v2.7
+# Z7 Customer Support Assistant v2.9
 
 Mobile-friendly bilingual support guide and customer-led call-flow UI.
 
@@ -25,3 +25,10 @@ Open `index.html` in a browser. For service-worker and installable PWA features,
 
 ## Safety
 Never ask customers to share passwords, OTPs, recovery codes, UPI PINs, or payment credentials. Honor a customer’s request to stop contact and follow the approved process for recording it.
+
+
+## v2.9 — Restore styling and refresh cached assets
+- Restored responsive dark theme and interactive call-flow styles
+- Added cache-busting query versions for CSS and JavaScript assets
+- Removed obsolete copy-response code that referenced a removed button
+- Keeps English, Hindi, Hinglish, customer-led flow, and no-copy controls

@@ -32,10 +32,8 @@ const count = document.querySelector("#result-count");
 const noResults = document.querySelector("#no-results");
 const title = document.querySelector("#result-title");
 const resultText = document.querySelector("#result-text");
-const copy = document.querySelector("#copy");
 const reset = document.querySelector("#reset");
 const status = document.querySelector("#copy-status");
-let currentText = "";
 let selected = "";
 
 function filterTopics() {
@@ -62,8 +60,6 @@ function selectTopic(button) {
   });
   title.textContent = item.title;
   resultText.textContent = item.text;
-  currentText = `${item.title}\n\n${item.text}`;
-  copy.hidden = false;
   reset.hidden = false;
   status.textContent = "";
 }
@@ -82,37 +78,14 @@ clearSearch.addEventListener("click", () => {
 
 reset.addEventListener("click", () => {
   selected = "";
-  currentText = "";
   topics.forEach(topic => {
     topic.classList.remove("active");
     topic.setAttribute("aria-pressed", "false");
   });
   title.textContent = "Choose a support topic";
   resultText.textContent = "A helpful guide and suggested response will appear here.";
-  copy.hidden = true;
   reset.hidden = true;
   status.textContent = "";
-});
-
-copy.addEventListener("click", async () => {
-  try {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(currentText);
-    } else {
-      const area = document.createElement("textarea");
-      area.value = currentText;
-      area.style.position = "fixed";
-      area.style.opacity = "0";
-      document.body.appendChild(area);
-      area.select();
-      const copied = document.execCommand("copy");
-      area.remove();
-      if (!copied) throw new Error("Copy unavailable");
-    }
-    status.textContent = "Response copied successfully.";
-  } catch {
-    status.textContent = "Copy unavailable. Please select and copy the response text manually.";
-  }
 });
 
 filterTopics();
