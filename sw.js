@@ -1,5 +1,5 @@
 const CACHE = "z7-support-v32";
-const FILES = ["./", "./index.html", "./styles.css?v=3.2", "./theme-v30.css?v=3.0", "./theme-v31.css?v=3.2", "./app.js?v=3.2", "./pro.js?v=3.2", "./v24.js?v=3.2", "./call-flow.js?v=3.2", "./workspace-v31.js?v=3.2", "./manifest.webmanifest", "./icon.svg"];
+const FILES = ["./", "./index.html", "./styles.css?v=3.2", "./theme-v30.css?v=3.2", "./theme-v31.css?v=3.2", "./app.js?v=3.2", "./pro.js?v=3.2", "./v24.js?v=3.2", "./call-flow.js?v=3.2", "./workspace-v31.js?v=3.2", "./manifest.webmanifest", "./icon.svg"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)));
   self.skipWaiting();
