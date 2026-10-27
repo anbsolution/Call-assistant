@@ -1,4 +1,4 @@
-/* Z7 Integrated Call Workflow Q&A v3.4 — offline, searchable, trilingual */
+/* Z7 Integrated Call Workflow Q&A v3.6 — smart branching, trilingual */
 (() => {
   if (document.querySelector(".qa-bank")) return;
   const items = [
@@ -595,10 +595,23 @@
   if (!flow) return;
 
   const ui = {
-    en: {eyebrow:"CALLING KNOWLEDGE BANK", title:"Questions & Answers", intro:"Use this guided Q&A inside the call workflow. Select the customer’s question, read the suggested response, then choose the customer’s reaction to continue.", search:"Search questions, topics or answers…", all:"All categories", question:"Customer question", answer:"Suggested response", empty:"No matching questions. Try another keyword.", count:n=>`${n} questions`, note:"Use only verified information. Never ask for passwords, OTPs, PINs, recovery codes or full bank details.", select:"Choose a question to see the answer.", reaction:"Customer’s response — choose the next step", reactions:{answered:"Understood / resolved",followup:"Still has a question",escalate:"Needs escalation",callback:"Busy / callback",decline:"Not interested",ended:"Customer ended the call"}, guidance:{answered:"Confirm whether anything else is needed, then follow the approved closing process.",followup:"Ask what remains unclear, search for that question, and select the most relevant response.",escalate:"Explain the approved escalation route. Do not promise a result or deadline unless verified.",callback:"Ask for a suitable time only if callback is permitted. Respect the customer’s preference.",decline:"Acknowledge the decision politely. Do not pressure the customer; follow the approved contact-preference process.",ended:"Mark the call as ended by the customer and stop the workflow."}},
-    hi: {eyebrow:"कॉलिंग नॉलेज बैंक", title:"सवाल और जवाब", intro:"कॉल वर्कफ़्लो के अंदर ग्राहक का सवाल चुनें। सुझाया गया जवाब पढ़ें और फिर ग्राहक की प्रतिक्रिया चुनकर आगे बढ़ें।", search:"सवाल, विषय या जवाब खोजें…", all:"सभी श्रेणियाँ", question:"ग्राहक का सवाल", answer:"सुझाया गया जवाब", empty:"कोई मेल खाता सवाल नहीं मिला। दूसरा शब्द खोजें।", count:n=>`${n} सवाल`, note:"केवल सत्यापित जानकारी दें। पासवर्ड, OTP, PIN, recovery code या पूरा बैंक विवरण कभी न माँगें।", select:"जवाब देखने के लिए सवाल चुनें।", reaction:"ग्राहक की प्रतिक्रिया — अगला कदम चुनें", reactions:{answered:"समझ गए / समाधान मिला",followup:"अभी भी सवाल है",escalate:"शिकायत / एस्केलेशन",callback:"व्यस्त / बाद में कॉल",decline:"रुचि नहीं है",ended:"ग्राहक ने कॉल समाप्त की"}, guidance:{answered:"पुष्टि करें कि और सहायता चाहिए या नहीं, फिर स्वीकृत समापन प्रक्रिया अपनाएँ।",followup:"पूछें कि क्या स्पष्ट नहीं हुआ, उस सवाल को खोजें और उपयुक्त जवाब चुनें।",escalate:"स्वीकृत एस्केलेशन प्रक्रिया बताएँ। सत्यापित हुए बिना परिणाम या समय-सीमा का वादा न करें।",callback:"केवल अनुमति होने पर सुविधाजनक समय पूछें और ग्राहक की पसंद का सम्मान करें।",decline:"ग्राहक के निर्णय का सम्मान करें। दबाव न डालें और संपर्क संबंधी स्वीकृत प्रक्रिया अपनाएँ।",ended:"कॉल को ग्राहक द्वारा समाप्त मानें और वर्कफ़्लो रोक दें।"}},
-    hinglish: {eyebrow:"CALLING KNOWLEDGE BANK", title:"Questions & Answers", intro:"Call workflow ke andar customer ka question choose karein. Suggested response padhkar customer ka reaction select karein aur flow aage badhayein.", search:"Question, topic ya answer search karein…", all:"All categories", question:"Customer ka question", answer:"Suggested response", empty:"Matching question nahi mila. Doosra keyword try karein.", count:n=>`${n} questions`, note:"Sirf verified information dein. Password, OTP, PIN, recovery code ya full bank details kabhi na maangein.", select:"Answer dekhne ke liye question choose karein.", reaction:"Customer ka response — next step choose karein", reactions:{answered:"Samajh gaye / solve ho gaya",followup:"Abhi bhi question hai",escalate:"Escalation chahiye",callback:"Busy / callback",decline:"Interest nahi hai",ended:"Customer ne call end ki"}, guidance:{answered:"Confirm karein ki aur help chahiye ya nahi, phir approved closing process follow karein.",followup:"Poochhein kya unclear hai, woh question search karein aur relevant answer select karein.",escalate:"Approved escalation process batayein. Verified hue bina result ya deadline promise na karein.",callback:"Sirf callback allowed ho tab suitable time poochhein aur customer ki preference respect karein.",decline:"Customer ke decision ka respect karein. Pressure na dalein; approved contact-preference process follow karein.",ended:"Call ko customer-ended mark karein aur workflow stop karein."}}
+    en: {eyebrow:"CALLING KNOWLEDGE BANK", title:"Questions & Answers", intro:"Use this guided Q&A inside the call workflow. Select the customer’s question, read the suggested response, then choose the customer’s reaction to get relevant next-question suggestions.", search:"Search questions, topics or answers…", all:"All categories", question:"Customer question", answer:"Suggested response", empty:"No matching questions. Try another keyword.", count:n=>`${n} questions`, note:"Use only verified information. Never ask for passwords, OTPs, PINs, recovery codes or full bank details.", select:"Choose a question to see the answer.", reaction:"Customer’s response — choose the next step", suggestedTitle:"Suggested next questions", reactions:{answered:"Understood / resolved",followup:"Still has a question",escalate:"Needs escalation",callback:"Busy / callback",decline:"Not interested",ended:"Customer ended the call"}, guidance:{answered:"Confirm whether anything else is needed, then follow the approved closing process.",followup:"Ask what remains unclear, search for that question, and select the most relevant response.",escalate:"Explain the approved escalation route. Do not promise a result or deadline unless verified.",callback:"Ask for a suitable time only if callback is permitted. Respect the customer’s preference.",decline:"Acknowledge the decision politely. Do not pressure the customer; follow the approved contact-preference process.",ended:"Mark the call as ended by the customer and stop the workflow."}},
+    hi: {eyebrow:"कॉलिंग नॉलेज बैंक", title:"सवाल और जवाब", intro:"कॉल वर्कफ़्लो के अंदर ग्राहक का सवाल चुनें। सुझाया गया जवाब पढ़ें और फिर ग्राहक की प्रतिक्रिया चुनें ताकि अगला उपयुक्त सवाल मिले।", search:"सवाल, विषय या जवाब खोजें…", all:"सभी श्रेणियाँ", question:"ग्राहक का सवाल", answer:"सुझाया गया जवाब", empty:"कोई मेल खाता सवाल नहीं मिला। दूसरा शब्द खोजें।", count:n=>`${n} सवाल`, note:"केवल सत्यापित जानकारी दें। पासवर्ड, OTP, PIN, recovery code या पूरा बैंक विवरण कभी न माँगें।", select:"जवाब देखने के लिए सवाल चुनें।", reaction:"ग्राहक की प्रतिक्रिया — अगला कदम चुनें", suggestedTitle:"अगले उपयोगी सवाल", reactions:{answered:"समझ गए / समाधान मिला",followup:"अभी भी सवाल है",escalate:"शिकायत / एस्केलेशन",callback:"व्यस्त / बाद में कॉल",decline:"रुचि नहीं है",ended:"ग्राहक ने कॉल समाप्त की"}, guidance:{answered:"पुष्टि करें कि और सहायता चाहिए या नहीं, फिर स्वीकृत समापन प्रक्रिया अपनाएँ।",followup:"पूछें कि क्या स्पष्ट नहीं हुआ, उस सवाल को खोजें और उपयुक्त जवाब चुनें।",escalate:"स्वीकृत एस्केलेशन प्रक्रिया बताएँ। सत्यापित हुए बिना परिणाम या समय-सीमा का वादा न करें।",callback:"केवल अनुमति होने पर सुविधाजनक समय पूछें और ग्राहक की पसंद का सम्मान करें।",decline:"ग्राहक के निर्णय का सम्मान करें। दबाव न डालें और संपर्क संबंधी स्वीकृत प्रक्रिया अपनाएँ।",ended:"कॉल को ग्राहक द्वारा समाप्त मानें और वर्कफ़्लो रोक दें।"}},
+    hinglish: {eyebrow:"CALLING KNOWLEDGE BANK", title:"Questions & Answers", intro:"Call workflow ke andar customer ka question choose karein. Suggested response padhkar customer ka reaction select karein aur relevant next question paayein.", search:"Question, topic ya answer search karein…", all:"All categories", question:"Customer ka question", answer:"Suggested response", empty:"Matching question nahi mila. Doosra keyword try karein.", count:n=>`${n} questions`, note:"Sirf verified information dein. Password, OTP, PIN, recovery code ya full bank details kabhi na maangein.", select:"Answer dekhne ke liye question choose karein.", reaction:"Customer ka response — next step choose karein", suggestedTitle:"Agley useful questions", reactions:{answered:"Samajh gaye / solve ho gaya",followup:"Abhi bhi question hai",escalate:"Escalation chahiye",callback:"Busy / callback",decline:"Interest nahi hai",ended:"Customer ne call end ki"}, guidance:{answered:"Confirm karein ki aur help chahiye ya nahi, phir approved closing process follow karein.",followup:"Poochhein kya unclear hai, woh question search karein aur relevant answer select karein.",escalate:"Approved escalation process batayein. Verified hue bina result ya deadline promise na karein.",callback:"Sirf callback allowed ho tab suitable time poochhein aur customer ki preference respect karein.",decline:"Customer ke decision ka respect karein. Pressure na dalein; approved contact-preference process follow karein.",ended:"Call ko customer-ended mark karein aur workflow stop karein."}}
   };
+
+  const timePlan = {
+    en:{eyebrow:"FLEXIBLE 60-MINUTE FRAMEWORK",title:"Guided call stages",note:"Never delay resolution",
+      stages:[["0–5 min","Opening & permission","Introduce yourself, explain the purpose, confirm it is a convenient time, and accept a no."],["5–15 min","Understand the need","Ask one open question, listen without interrupting, and confirm the main concern."],["15–25 min","Clarify the issue","Ask only relevant follow-up questions. Never request passwords, OTPs, PINs, or full bank details."],["25–35 min","Give the answer","Choose the closest Q&A entry, explain verified steps clearly, and check whether the answer makes sense."],["35–50 min","Resolve or route","If unresolved, follow approved troubleshooting or escalation. Do not repeat questions just to fill time."],["50–60 min","Recap & next steps","Summarize, state only confirmed next steps, ask if anything else is needed, and close politely."]],
+      selected:"Select a stage for guidance. These are flexible planning windows, not mandatory durations."},
+    hi:{eyebrow:"लचीला 60-मिनट कॉल फ्रेमवर्क",title:"कॉल के चरण",note:"समाधान में देरी न करें",
+      stages:[["0–5 मिनट","परिचय और अनुमति","अपना परिचय दें, कॉल का उद्देश्य बताएँ, पूछें कि अभी बात करना सुविधाजनक है या नहीं और मना करने पर सम्मान करें।"],["5–15 मिनट","ज़रूरत समझें","एक खुला सवाल पूछें, बिना बीच में टोके सुनें और मुख्य समस्या की पुष्टि करें।"],["15–25 मिनट","समस्या स्पष्ट करें","केवल ज़रूरी सवाल पूछें। पासवर्ड, OTP, PIN या बैंक का पूरा विवरण कभी न माँगें।"],["25–35 मिनट","जवाब दें","उपयुक्त Q&A चुनें, सत्यापित कदम स्पष्ट बताएँ और पूछें कि बात समझ आई या नहीं।"],["35–50 मिनट","समाधान या सही विभाग","समस्या बाकी हो तो स्वीकृत प्रक्रिया अपनाएँ। समय भरने के लिए सवाल न दोहराएँ।"],["50–60 मिनट","सारांश और अगला कदम","सार दें, केवल पुष्टि किए गए अगले कदम बताएँ, पूछें कि और मदद चाहिए या नहीं और विनम्रता से कॉल समाप्त करें।"]],
+      selected:"चरण चुनकर निर्देश देखें। ये लचीले योजना-समय हैं, अनिवार्य अवधि नहीं।"},
+    hinglish:{eyebrow:"FLEXIBLE 60-MINUTE CALL FRAMEWORK",title:"Calling ke stages",note:"Resolution delay na karein",
+      stages:[["0–5 min","Opening aur permission","Introduction dein, purpose batayein, poochhein abhi baat convenient hai ya nahi; mana karne par respect karein."],["5–15 min","Need samjhein","Ek open question poochhein, dhyan se sunein aur main concern confirm karein."],["15–25 min","Issue clarify karein","Sirf relevant questions poochhein. Password, OTP, PIN ya full bank details kabhi na maangein."],["25–35 min","Answer dein","Relevant Q&A choose karein, verified steps simple language mein batayein aur understanding confirm karein."],["35–50 min","Resolve ya route karein","Issue solve na ho to approved troubleshooting/escalation follow karein. Time fill karne ke liye questions repeat na karein."],["50–60 min","Recap aur next steps","Summary dein, sirf confirmed next steps batayein, aur help chahiye ya nahi poochhkar politely close karein."]],
+      selected:"Stage select karke guidance dekhein. Yeh flexible planning windows hain, call ko itna lamba karna mandatory nahi."}
+  };
+
   let lang = document.querySelector("#flow-language")?.value || "en";
   const categories = [...new Set(items.map(x => x.category))];
   const section = document.createElement("section");
@@ -608,6 +621,12 @@
       <div><p class="eyebrow" data-qa="eyebrow"></p><h2 data-qa="title"></h2><p class="qa-intro" data-qa="intro"></p></div>
       <span class="qa-count" data-qa="count"></span>
     </div>
+
+    <section class="qa-timeline" aria-label="60-minute guided call plan">
+      <div class="qa-timeline-head"><div><p class="qa-subtitle" data-qa="time-eyebrow"></p><h3 data-qa="time-title"></h3></div><span class="qa-time-note" data-qa="time-note"></span></div>
+      <div class="qa-time-stages" data-qa="time-stages"></div>
+      <p class="qa-guidance" data-qa="time-guidance" aria-live="polite"></p>
+    </section>
     <label class="qa-search-label"><span aria-hidden="true">⌕</span><input type="search" data-qa="search" autocomplete="off"></label>
     <label class="qa-category-label"><span data-qa="category-label">Category</span><select data-qa="category"></select></label>
     <div class="qa-layout">
@@ -625,6 +644,10 @@
         <button type="button" class="qa-reaction" data-reaction="ended"></button>
       </div>
       <p class="qa-guidance" data-qa="guidance" aria-live="polite"></p>
+      <div class="qa-suggested" data-qa="suggested" hidden>
+        <p class="qa-subtitle" data-qa="suggested-title"></p>
+        <div class="qa-suggested-list" data-qa="suggested-list"></div>
+      </div>
     </div>
     <p class="qa-note" data-qa="note"></p>`;
   flow.append(section);
@@ -648,6 +671,8 @@
       $("next-step").hidden = !item;
       $("guidance").textContent = "";
       section.querySelectorAll(".qa-reaction").forEach(b => b.classList.remove("active"));
+      $("suggested").hidden = true;
+      $("suggested-list").replaceChildren();
     }
   }
   function renderList() {
@@ -673,6 +698,22 @@
     if (!filtered.some(item => item.id === selected?.id)) renderAnswer(filtered[0] || null);
     else renderAnswer(selected);
   }
+
+  function renderTimePlan() {
+    const plan = timePlan[lang] || timePlan.en;
+    $("time-eyebrow").textContent=plan.eyebrow; $("time-title").textContent=plan.title; $("time-note").textContent=plan.note;
+    const wrap=$("time-stages"); wrap.replaceChildren();
+    plan.stages.forEach(stage=>{
+      const b=document.createElement("button"); b.type="button"; b.className="qa-time-stage";
+      b.innerHTML='<span class="qa-time-range"></span><strong></strong><span class="qa-time-open"></span>';
+      b.querySelector(".qa-time-range").textContent=stage[0]; b.querySelector("strong").textContent=stage[1];
+      b.querySelector(".qa-time-open").textContent=lang==="hi"?"निर्देश देखें":lang==="hinglish"?"Guidance dekhein":"View guidance";
+      b.addEventListener("click",()=>{wrap.querySelectorAll(".qa-time-stage").forEach(el=>el.classList.toggle("active",el===b));$("time-guidance").textContent=stage[2];});
+      wrap.append(b);
+    });
+    $("time-guidance").textContent=plan.selected;
+  }
+
   function translate() {
     const t = ui[lang];
     ["eyebrow","title","intro","question","answer","note"].forEach(key => $(key).textContent = t[key]);
@@ -680,6 +721,8 @@
     $("category-label").textContent = lang === "hi" ? "श्रेणी" : "Category";
     all.textContent = t.all;
     renderList();
+    renderTimePlan();
+    renderReactions();
   }
   const reactionWrap = $("next-step");
   const reactionButtons = [...section.querySelectorAll("[data-reaction]")];
@@ -692,10 +735,53 @@
       button.onclick = () => {
         $("guidance").textContent = t.guidance[key];
         reactionButtons.forEach(b => b.classList.toggle("active", b === button));
+        renderSuggestions(key);
       };
     });
     reactionWrap.hidden = !selected;
   }
+  function renderSuggestions(reactionKey) {
+    const wrap = $("suggested");
+    const target = $("suggested-list");
+    target.replaceChildren();
+    if (!selected || ["decline", "ended"].includes(reactionKey)) {
+      wrap.hidden = true;
+      return;
+    }
+    let preferred = [];
+    if (reactionKey === "followup") {
+      preferred = [selected.category];
+    } else if (reactionKey === "escalate") {
+      preferred = ["Complaints & escalation", "Process & expectations", "Contact preferences"];
+    } else if (reactionKey === "callback") {
+      preferred = ["Permission & timing", "Contact preferences"];
+    } else if (reactionKey === "answered") {
+      preferred = [selected.category, "Closing & call control", "Process & expectations"];
+    }
+    const suggestions = items.filter(item =>
+      item.id !== selected.id && preferred.includes(item.category)
+    ).slice(0, 3);
+    if (!suggestions.length) {
+      wrap.hidden = true;
+      return;
+    }
+    $("suggested-title").textContent = ui[lang].suggestedTitle;
+    suggestions.forEach(item => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "qa-suggested-item";
+      b.textContent = item.q[lang];
+      b.addEventListener("click", () => {
+        renderAnswer(item);
+        $("guidance").textContent = "";
+        reactionButtons.forEach(el => el.classList.remove("active"));
+        wrap.hidden = true;
+      });
+      target.append(b);
+    });
+    wrap.hidden = false;
+  }
+
   search.addEventListener("input", renderList);
   category.addEventListener("change", renderList);
   document.querySelector("#flow-language")?.addEventListener("change", event => {

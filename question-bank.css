@@ -12,3 +12,23 @@
 .qa-reaction.active,.qa-reaction:focus-visible{border-color:#21b85a;background:#dfffe9;outline:2px solid rgba(33,184,90,.15)}
 .qa-guidance{margin:9px 0 0;padding:10px 12px;border-radius:10px;background:#effaf2;color:#315b40;font-size:12px;line-height:1.6;min-height:18px}
 @media(max-width:420px){.qa-reactions{grid-template-columns:1fr}.qa-reaction{min-height:36px}}
+
+/* v3.5 flexible 60-minute guided call plan */
+.qa-timeline{margin:0 0 16px;padding:14px;border:1px solid #d5e8db;border-radius:14px;background:linear-gradient(135deg,#f5fff8,#fff)}
+.qa-timeline-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.qa-timeline-head h3{margin:0;color:#183d2a;font-size:18px}
+.qa-time-note{max-width:44%;font-size:11px;color:#357b53;text-align:right}
+.qa-time-stages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.qa-time-stage{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-height:84px;padding:10px;border:1px solid #d5e5db;border-radius:11px;background:#fff;color:#214a31;text-align:left;font:inherit;cursor:pointer}
+.qa-time-stage strong{font-size:13px;line-height:1.35}
+.qa-time-range{font-size:11px;font-weight:700;color:#21834b}
+.qa-time-open{font-size:11px;color:#657b6c}
+.qa-time-stage.active{border-color:#21b85a;background:#e6ffed;box-shadow:0 0 0 2px #d0f7dc}
+@media(max-width:420px){.qa-timeline{padding:10px}.qa-time-stages{grid-template-columns:1fr}.qa-time-stage{min-height:64px}}
+
+/* v3.6 smart question branching */
+.qa-suggested{margin-top:12px;padding-top:10px;border-top:1px solid #dcece1}
+.qa-suggested-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.qa-suggested-item{padding:10px;border:1px solid #cfe3d5;border-radius:10px;background:#fff;color:#214a31;text-align:left;font:inherit;font-size:12px;line-height:1.4;cursor:pointer}
+.qa-suggested-item:hover,.qa-suggested-item:focus-visible{border-color:#21b85a;background:#eaffef;outline:2px solid rgba(33,184,90,.12)}
+@media(max-width:420px){.qa-suggested-list{grid-template-columns:1fr}}
