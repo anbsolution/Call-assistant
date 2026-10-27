@@ -6,33 +6,52 @@
 <meta name="theme-color" content="#101827">
 <meta name="description" content="Z7 Customer Support Assistant">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css">
 <title>Z7 Customer Support Assistant</title>
 </head>
 <body>
 <header>
-  <div class="brand"><span class="logo">Z7</span><div><h1>Z7 Support</h1><p>Customer Support Assistant · v2.0</p></div></div>
+  <div class="brand">
+    <span class="logo" aria-hidden="true">Z7</span>
+    <div><h1>Z7 Support</h1><p>Customer Support Assistant · v2.1</p></div>
+  </div>
 </header>
 <main>
-<section class="welcome">
-  <p class="eyebrow">SUPPORT CENTER</p>
-  <h2>How can we help you?</h2>
-  <p>Select a topic to view a support guide and suggested response.</p>
-</section>
-<section class="topics" id="topics">
-  <button data-topic="login">🔐 Login & account access</button>
-  <button data-topic="password">🔑 Password reset</button>
-  <button data-topic="security">🛡️ Suspicious links & fraud</button>
-  <button data-topic="privacy">🔒 Privacy requests</button>
-  <button data-topic="complaint">💬 Complaint or escalation</button>
-  <button data-topic="optout">📵 Stop support calls</button>
-</section>
-<section class="result" aria-live="polite">
-  <h2 id="result-title">Choose a support topic</h2>
-  <p id="result-text">A helpful guide and response will appear here.</p>
-  <button id="copy" hidden>Copy response</button>
-  <p id="copy-status" role="status"></p>
-</section>
+  <section class="welcome">
+    <p class="eyebrow">SMART SUPPORT CENTER</p>
+    <h2>How can we help you?</h2>
+    <p>Search a topic or select a support guide below.</p>
+  </section>
+
+  <label class="searchbox" for="topic-search">
+    <span aria-hidden="true">⌕</span>
+    <input id="topic-search" type="search" placeholder="Search support topics…" autocomplete="off">
+    <button id="clear-search" type="button" aria-label="Clear search" hidden>×</button>
+  </label>
+  <p id="result-count" class="result-count" aria-live="polite">6 support topics</p>
+
+  <section class="topics" id="topics" aria-label="Support topics">
+    <button class="topic" data-topic="login">🔐 Login &amp; account access</button>
+    <button class="topic" data-topic="password">🔑 Password reset</button>
+    <button class="topic" data-topic="security">🛡️ Suspicious links &amp; fraud</button>
+    <button class="topic" data-topic="privacy">🔒 Privacy requests</button>
+    <button class="topic" data-topic="complaint">💬 Complaint or escalation</button>
+    <button class="topic" data-topic="optout">📵 Stop support calls</button>
+  </section>
+
+  <p id="no-results" class="no-results" hidden>No matching topics. Try another search.</p>
+
+  <section class="result" aria-live="polite" aria-labelledby="result-title">
+    <p class="eyebrow">SUPPORT GUIDE</p>
+    <h2 id="result-title">Choose a support topic</h2>
+    <p id="result-text">A helpful guide and suggested response will appear here.</p>
+    <div class="result-actions">
+      <button id="copy" type="button" hidden>Copy response</button>
+      <button id="reset" type="button" class="secondary" hidden>Clear selection</button>
+    </div>
+    <p id="copy-status" class="status" role="status"></p>
+  </section>
 </main>
 <footer>Protect personal information. Never ask customers to share passwords or OTPs.</footer>
 <script src="app.js"></script>
