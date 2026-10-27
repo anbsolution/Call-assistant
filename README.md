@@ -36,3 +36,11 @@ Never ask customers to share passwords, OTPs, recovery codes, or full payment cr
 - Hindi/English interface toggle and Hindi support responses
 - Device-local favorite topics
 - Favorite, recent-history, and viewed-topic lists contain topic IDs only
+
+ 
+## v2.6 — Interactive Calling Flow
+- Branching call script based on the original Simple English + Hinglish support sections
+- Customer can choose the next response path
+- Back, restart and copy-script controls
+- Login, account support, password reset, suspicious links, fraud safety and opt-out branches
+- No passwords, OTPs or customer conversation data stored
