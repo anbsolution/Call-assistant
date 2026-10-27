@@ -1,4 +1,4 @@
-/* Z7 Question & Answer Bank v3.3 — offline, searchable, trilingual */
+/* Z7 Integrated Call Workflow Q&A v3.4 — offline, searchable, trilingual */
 (() => {
   if (document.querySelector(".qa-bank")) return;
   const items = [
@@ -595,9 +595,9 @@
   if (!flow) return;
 
   const ui = {
-    en: {eyebrow:"CALLING KNOWLEDGE BANK", title:"Questions & Answers", intro:"Choose a customer question or search by keyword. Use the suggested answer as a guide and follow approved policy.", search:"Search questions, topics or answers…", all:"All categories", question:"Customer question", answer:"Suggested response", empty:"No matching questions. Try another keyword.", count:n=>`${n} questions`, note:"Use only verified information. Never ask for passwords, OTPs, PINs, recovery codes or full bank details.", select:"Choose a question to see the answer."},
-    hi: {eyebrow:"कॉलिंग नॉलेज बैंक", title:"सवाल और जवाब", intro:"ग्राहक का सवाल चुनें या कीवर्ड से खोजें। सुझाए गए जवाब को मार्गदर्शन की तरह उपयोग करें और स्वीकृत प्रक्रिया अपनाएँ।", search:"सवाल, विषय या जवाब खोजें…", all:"सभी श्रेणियाँ", question:"ग्राहक का सवाल", answer:"सुझाया गया जवाब", empty:"कोई मेल खाता सवाल नहीं मिला। दूसरा शब्द खोजें।", count:n=>`${n} सवाल`, note:"केवल सत्यापित जानकारी दें। पासवर्ड, OTP, PIN, recovery code या पूरा बैंक विवरण कभी न माँगें।", select:"जवाब देखने के लिए सवाल चुनें।"},
-    hinglish: {eyebrow:"CALLING KNOWLEDGE BANK", title:"Questions & Answers", intro:"Customer ka question choose karein ya keyword se search karein. Suggested answer ko guide ki tarah use karein aur approved process follow karein.", search:"Question, topic ya answer search karein…", all:"All categories", question:"Customer ka question", answer:"Suggested response", empty:"Matching question nahi mila. Doosra keyword try karein.", count:n=>`${n} questions`, note:"Sirf verified information dein. Password, OTP, PIN, recovery code ya full bank details kabhi na maangein.", select:"Answer dekhne ke liye question choose karein."}
+    en: {eyebrow:"CALLING KNOWLEDGE BANK", title:"Questions & Answers", intro:"Use this guided Q&A inside the call workflow. Select the customer’s question, read the suggested response, then choose the customer’s reaction to continue.", search:"Search questions, topics or answers…", all:"All categories", question:"Customer question", answer:"Suggested response", empty:"No matching questions. Try another keyword.", count:n=>`${n} questions`, note:"Use only verified information. Never ask for passwords, OTPs, PINs, recovery codes or full bank details.", select:"Choose a question to see the answer.", reaction:"Customer’s response — choose the next step", reactions:{answered:"Understood / resolved",followup:"Still has a question",escalate:"Needs escalation",callback:"Busy / callback",decline:"Not interested",ended:"Customer ended the call"}, guidance:{answered:"Confirm whether anything else is needed, then follow the approved closing process.",followup:"Ask what remains unclear, search for that question, and select the most relevant response.",escalate:"Explain the approved escalation route. Do not promise a result or deadline unless verified.",callback:"Ask for a suitable time only if callback is permitted. Respect the customer’s preference.",decline:"Acknowledge the decision politely. Do not pressure the customer; follow the approved contact-preference process.",ended:"Mark the call as ended by the customer and stop the workflow."}},
+    hi: {eyebrow:"कॉलिंग नॉलेज बैंक", title:"सवाल और जवाब", intro:"कॉल वर्कफ़्लो के अंदर ग्राहक का सवाल चुनें। सुझाया गया जवाब पढ़ें और फिर ग्राहक की प्रतिक्रिया चुनकर आगे बढ़ें।", search:"सवाल, विषय या जवाब खोजें…", all:"सभी श्रेणियाँ", question:"ग्राहक का सवाल", answer:"सुझाया गया जवाब", empty:"कोई मेल खाता सवाल नहीं मिला। दूसरा शब्द खोजें।", count:n=>`${n} सवाल`, note:"केवल सत्यापित जानकारी दें। पासवर्ड, OTP, PIN, recovery code या पूरा बैंक विवरण कभी न माँगें।", select:"जवाब देखने के लिए सवाल चुनें।", reaction:"ग्राहक की प्रतिक्रिया — अगला कदम चुनें", reactions:{answered:"समझ गए / समाधान मिला",followup:"अभी भी सवाल है",escalate:"शिकायत / एस्केलेशन",callback:"व्यस्त / बाद में कॉल",decline:"रुचि नहीं है",ended:"ग्राहक ने कॉल समाप्त की"}, guidance:{answered:"पुष्टि करें कि और सहायता चाहिए या नहीं, फिर स्वीकृत समापन प्रक्रिया अपनाएँ।",followup:"पूछें कि क्या स्पष्ट नहीं हुआ, उस सवाल को खोजें और उपयुक्त जवाब चुनें।",escalate:"स्वीकृत एस्केलेशन प्रक्रिया बताएँ। सत्यापित हुए बिना परिणाम या समय-सीमा का वादा न करें।",callback:"केवल अनुमति होने पर सुविधाजनक समय पूछें और ग्राहक की पसंद का सम्मान करें।",decline:"ग्राहक के निर्णय का सम्मान करें। दबाव न डालें और संपर्क संबंधी स्वीकृत प्रक्रिया अपनाएँ।",ended:"कॉल को ग्राहक द्वारा समाप्त मानें और वर्कफ़्लो रोक दें।"}},
+    hinglish: {eyebrow:"CALLING KNOWLEDGE BANK", title:"Questions & Answers", intro:"Call workflow ke andar customer ka question choose karein. Suggested response padhkar customer ka reaction select karein aur flow aage badhayein.", search:"Question, topic ya answer search karein…", all:"All categories", question:"Customer ka question", answer:"Suggested response", empty:"Matching question nahi mila. Doosra keyword try karein.", count:n=>`${n} questions`, note:"Sirf verified information dein. Password, OTP, PIN, recovery code ya full bank details kabhi na maangein.", select:"Answer dekhne ke liye question choose karein.", reaction:"Customer ka response — next step choose karein", reactions:{answered:"Samajh gaye / solve ho gaya",followup:"Abhi bhi question hai",escalate:"Escalation chahiye",callback:"Busy / callback",decline:"Interest nahi hai",ended:"Customer ne call end ki"}, guidance:{answered:"Confirm karein ki aur help chahiye ya nahi, phir approved closing process follow karein.",followup:"Poochhein kya unclear hai, woh question search karein aur relevant answer select karein.",escalate:"Approved escalation process batayein. Verified hue bina result ya deadline promise na karein.",callback:"Sirf callback allowed ho tab suitable time poochhein aur customer ki preference respect karein.",decline:"Customer ke decision ka respect karein. Pressure na dalein; approved contact-preference process follow karein.",ended:"Call ko customer-ended mark karein aur workflow stop karein."}}
   };
   let lang = document.querySelector("#flow-language")?.value || "en";
   const categories = [...new Set(items.map(x => x.category))];
@@ -614,8 +614,20 @@
       <div class="qa-list-wrap"><p class="qa-subtitle" data-qa="question"></p><div class="qa-list" data-qa="list"></div><p class="qa-empty" data-qa="empty" hidden></p></div>
       <article class="qa-answer"><p class="qa-subtitle" data-qa="answer"></p><h3 data-qa="answer-question"></h3><p data-qa="answer-text"></p></article>
     </div>
+    <div class="qa-next-step" data-qa="next-step" hidden>
+      <p class="qa-subtitle" data-qa="reaction-label"></p>
+      <div class="qa-reactions">
+        <button type="button" class="qa-reaction" data-reaction="answered"></button>
+        <button type="button" class="qa-reaction" data-reaction="followup"></button>
+        <button type="button" class="qa-reaction" data-reaction="escalate"></button>
+        <button type="button" class="qa-reaction" data-reaction="callback"></button>
+        <button type="button" class="qa-reaction" data-reaction="decline"></button>
+        <button type="button" class="qa-reaction" data-reaction="ended"></button>
+      </div>
+      <p class="qa-guidance" data-qa="guidance" aria-live="polite"></p>
+    </div>
     <p class="qa-note" data-qa="note"></p>`;
-  flow.insertAdjacentElement("afterend", section);
+  flow.append(section);
   const $ = key => section.querySelector(`[data-qa="${key}"]`);
   const search = $("search"), category = $("category"), list = $("list");
   let selected = null;
@@ -632,6 +644,11 @@
     $("answer-question").textContent = item ? item.q[lang] : ui[lang].select;
     $("answer-text").textContent = item ? item.a[lang] : "";
     section.querySelectorAll(".qa-item").forEach(b => b.classList.toggle("active", b.dataset.id === item?.id));
+    if ($("next-step")) {
+      $("next-step").hidden = !item;
+      $("guidance").textContent = "";
+      section.querySelectorAll(".qa-reaction").forEach(b => b.classList.remove("active"));
+    }
   }
   function renderList() {
     const query = search.value.trim().toLocaleLowerCase();
@@ -663,6 +680,21 @@
     $("category-label").textContent = lang === "hi" ? "श्रेणी" : "Category";
     all.textContent = t.all;
     renderList();
+  }
+  const reactionWrap = $("next-step");
+  const reactionButtons = [...section.querySelectorAll("[data-reaction]")];
+  function renderReactions() {
+    const t = ui[lang];
+    $("reaction-label").textContent = t.reaction;
+    reactionButtons.forEach(button => {
+      const key = button.dataset.reaction;
+      button.textContent = t.reactions[key];
+      button.onclick = () => {
+        $("guidance").textContent = t.guidance[key];
+        reactionButtons.forEach(b => b.classList.toggle("active", b === button));
+      };
+    });
+    reactionWrap.hidden = !selected;
   }
   search.addEventListener("input", renderList);
   category.addEventListener("change", renderList);
