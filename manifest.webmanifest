@@ -1,13 +1,10 @@
 {
-  "name": "Z7 Smart Calling Assistant",
-  "short_name": "Z7 Call Guide",
-  "description": "Interactive Z7 call script in Simple English and Hinglish.",
+  "name": "Z7 Customer Support Assistant",
+  "short_name": "Z7 Support",
   "start_url": "./",
-  "scope": "./",
   "display": "standalone",
-  "background_color": "#f3f7f5",
-  "theme_color": "#0c6b54",
-  "icons": [
-    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
-  ]
+  "background_color": "#0b1120",
+  "theme_color": "#101827",
+  "description": "Customer support guides and response templates",
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]
 }
