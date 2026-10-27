@@ -30,3 +30,9 @@ Never ask customers to share passwords, OTPs, recovery codes, or full payment cr
 - Hindi/English interface toggle and Hindi support responses
 - Device-local favorite topics
 - Favorite, recent-history, and viewed-topic lists contain topic IDs only
+
+
+## v2.4
+- Hindi/English interface toggle and Hindi support responses
+- Device-local favorite topics
+- Favorite, recent-history, and viewed-topic lists contain topic IDs only
