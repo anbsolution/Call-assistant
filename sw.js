@@ -1,5 +1,5 @@
-const CACHE = "z7-support-v31";
-const FILES = ["./", "./index.html", "./styles.css?v=3.1", "./theme-v30.css?v=3.0", "./theme-v31.css?v=3.1", "./app.js?v=3.1", "./pro.js?v=3.1", "./v24.js?v=3.1", "./call-flow.js?v=3.1", "./workspace-v31.js?v=3.1", "./manifest.webmanifest", "./icon.svg"];
+const CACHE = "z7-support-v32";
+const FILES = ["./", "./index.html", "./styles.css?v=3.2", "./theme-v30.css?v=3.0", "./theme-v31.css?v=3.2", "./app.js?v=3.2", "./pro.js?v=3.2", "./v24.js?v=3.2", "./call-flow.js?v=3.2", "./workspace-v31.js?v=3.2", "./manifest.webmanifest", "./icon.svg"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)));
   self.skipWaiting();
@@ -10,5 +10,19 @@ self.addEventListener("activate", event => {
 });
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
+  const url = new URL(event.request.url);
+  if (url.origin !== self.location.origin) return;
+  const isDocumentOrAsset = event.request.mode === "navigate" ||
+    /\.(?:html|css|js)$/.test(url.pathname);
+  if (isDocumentOrAsset) {
+    event.respondWith(fetch(event.request).then(response => {
+      if (response && response.ok) {
+        const copy = response.clone();
+        caches.open(CACHE).then(cache => cache.put(event.request, copy));
+      }
+      return response;
+    }).catch(() => caches.match(event.request).then(cached => cached || caches.match("./index.html"))));
+    return;
+  }
   event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request)));
 });
