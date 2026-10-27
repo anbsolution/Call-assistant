@@ -1,4 +1,4 @@
-# Z7 Customer Support Assistant v3.0
+# Z7 Customer Support Assistant v3.1
 
 Mobile-friendly bilingual support guide and customer-led call-flow UI.
 
@@ -39,3 +39,10 @@ Never ask customers to share passwords, OTPs, recovery codes, UPI PINs, or payme
 - Desktop uses a two-column workspace; mobile uses compact single-column cards
 - Added theme stylesheet as a separate file to preserve the existing base stylesheet
 - Small mobile screens may still need scrolling to read long responses; content is not hidden
+
+\n## v3.1 — Compact tab navigation
+- Added Home, Workspace, Call Flow and Support tabs to reduce page scrolling between major sections
+- Existing sections are moved, not cloned, so their event handlers and state remain attached
+- Added versioned CSS/JavaScript asset URLs and a new service-worker cache key
+- Call flow keeps its English, Hindi and Hinglish language selector
+- Long response text can still require scrolling on small screens; it remains readable
