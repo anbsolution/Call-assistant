@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c6b54">
+  <meta name="description" content="Interactive Z7 calling script in simple English and Hinglish.">
+  <title>Z7 Smart Calling Assistant</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark" aria-hidden="true">Z7</div>
+    <div class="brand-copy"><strong>Z7 Smart Calling Assistant</strong><span>Interactive call guide · Version 1.0</span></div>
+    <button id="installBtn" class="install-btn hidden" type="button">Install</button>
+  </header>
+
+  <main class="shell">
+    <section class="intro card">
+      <span class="eyebrow">LIVE CALL MODE</span>
+      <h1>Ask. Listen. Choose. Continue.</h1>
+      <p>Select the customer's answer and the next suggested response will appear. No customer name is required.</p>
+      <div class="settings-row">
+        <label for="language">Script language</label>
+        <select id="language">
+          <option value="both">English + Hinglish</option>
+          <option value="en">Simple English only</option>
+          <option value="hi">Hinglish only</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="progress-wrap" aria-label="Call progress">
+      <div class="progress-label"><span id="stepLabel">Step 1</span><span id="progressPct">5%</span></div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+    </section>
+
+    <section class="script-card card" aria-live="polite">
+      <div class="step-top"><span id="stepPill" class="pill">OPENING</span><button id="copyAllBtn" class="quiet-btn" type="button">Copy visible script</button></div>
+      <h2 id="stepTitle">Opening the call</h2>
+      <div id="englishPanel" class="script-panel">
+        <div class="script-label">SAY THIS · ENGLISH</div>
+        <p id="englishText"></p>
+        <button id="copyEnglish" class="copy-btn" type="button">Copy English</button>
+      </div>
+      <div id="hinglishPanel" class="script-panel hinglish-panel">
+        <div class="script-label">YE BOLEIN · HINGLISH</div>
+        <p id="hinglishText"></p>
+        <button id="copyHinglish" class="copy-btn" type="button">Copy Hinglish</button>
+      </div>
+      <div class="question-area">
+        <h3 id="questionText">Customer ka response kya hai?</h3>
+        <div id="options" class="options"></div>
+      </div>
+      <div class="nav-row">
+        <button id="backBtn" class="secondary-btn" type="button" disabled>← Back</button>
+        <button id="restartBtn" class="secondary-btn" type="button">↻ New call</button>
+      </div>
+    </section>
+
+    <section class="notice">
+      <strong>Safety reminder</strong>
+      <p>Only state information you can verify. The reward amounts shown in the source screenshots are not guaranteed. Never ask for passwords, OTPs, UPI PINs, or bank details. Respect requests to end the call or stop marketing calls.</p>
+    </section>
+    <footer>Made for mobile use · Works offline after the first successful load when hosted with HTTPS.</footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

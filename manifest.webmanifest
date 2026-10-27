@@ -1,0 +1,13 @@
+{
+  "name": "Z7 Smart Calling Assistant",
+  "short_name": "Z7 Call Guide",
+  "description": "Interactive Z7 call script in Simple English and Hinglish.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f7f5",
+  "theme_color": "#0c6b54",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
