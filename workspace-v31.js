@@ -62,6 +62,33 @@
     });
   }
 
+  // Give the Support tab useful quick links without cloning the existing topic buttons.
+  const supportPanel = panels.support;
+  if (supportPanel && !supportPanel.querySelector(".support-quickstart")) {
+    const quick = document.createElement("section");
+    quick.className = "support-quickstart";
+    quick.innerHTML = `
+      <p class="eyebrow">QUICK SUPPORT</p>
+      <h2>Choose a support topic</h2>
+      <p class="support-quickstart-copy">Select a topic below to open its guidance. Your selection stays in this Support tab.</p>
+      <div class="support-shortcuts">
+        <button type="button" data-topic-shortcut="login">Login &amp; account access</button>
+        <button type="button" data-topic-shortcut="password">Password reset</button>
+        <button type="button" data-topic-shortcut="security">Suspicious links &amp; fraud</button>
+        <button type="button" data-topic-shortcut="privacy">Privacy requests</button>
+        <button type="button" data-topic-shortcut="complaint">Complaint or escalation</button>
+        <button type="button" data-topic-shortcut="optout">Stop support calls</button>
+      </div>`;
+    supportPanel.append(quick);
+    quick.addEventListener("click", event => {
+      const shortcut = event.target.closest("[data-topic-shortcut]");
+      if (!shortcut) return;
+      const topic = document.querySelector(`#topics [data-topic="${shortcut.dataset.topicShortcut}"]`);
+      if (topic) topic.click();
+      supportPanel.querySelector(".result")?.scrollIntoView({block:"nearest", behavior:"smooth"});
+    });
+  }
+
   // Keep no-results beside topics and make it part of the Home view.
   main.replaceChildren(...views.map(v => panels[v.id]));
   main.insertAdjacentElement("beforebegin", nav);
