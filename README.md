@@ -1,4 +1,4 @@
-# Z7 Customer Support Assistant v2.9
+# Z7 Customer Support Assistant v3.0
 
 Mobile-friendly bilingual support guide and customer-led call-flow UI.
 
@@ -32,3 +32,10 @@ Never ask customers to share passwords, OTPs, recovery codes, UPI PINs, or payme
 - Added cache-busting query versions for CSS and JavaScript assets
 - Removed obsolete copy-response code that referenced a removed button
 - Keeps English, Hindi, Hinglish, customer-led flow, and no-copy controls
+
+\n## v3.0 — Light neon green UI
+- Clean light theme with subtle neon-green accents and green navigation/action controls
+- Compact responsive dashboard with denser topic cards and support panels
+- Desktop uses a two-column workspace; mobile uses compact single-column cards
+- Added theme stylesheet as a separate file to preserve the existing base stylesheet
+- Small mobile screens may still need scrolling to read long responses; content is not hidden
