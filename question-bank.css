@@ -32,3 +32,19 @@
 .qa-suggested-item{padding:10px;border:1px solid #cfe3d5;border-radius:10px;background:#fff;color:#214a31;text-align:left;font:inherit;font-size:12px;line-height:1.4;cursor:pointer}
 .qa-suggested-item:hover,.qa-suggested-item:focus-visible{border-color:#21b85a;background:#eaffef;outline:2px solid rgba(33,184,90,.12)}
 @media(max-width:420px){.qa-suggested-list{grid-template-columns:1fr}}
+
+/* v3.7 session progress and call summary */
+.qa-session{margin-top:16px;padding:14px;border:1px solid #cfe5d7;border-radius:14px;background:linear-gradient(145deg,#fbfffc,#effaf3);color:#183c29}
+.qa-session-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.qa-session-head h3{font-size:18px;margin:0 0 8px}
+.qa-session-count{font-size:11px;font-weight:800;color:#21854c;background:#e5f8eb;border:1px solid #c7e3d0;border-radius:20px;padding:5px 8px}
+.qa-progress-track{height:8px;overflow:hidden;border-radius:20px;background:#dceee2}.qa-progress-track span{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#8df0ae,#20c968);transition:width .2s ease}
+.qa-progress-label{font-size:12px;line-height:1.5;color:#5d7465;margin:8px 0 12px}
+.qa-session-notes-label{display:block;font-size:12px;font-weight:700;color:#315d40;margin:8px 0 6px}
+.qa-session textarea{display:block;width:100%;box-sizing:border-box;min-height:76px;padding:10px;border:1px solid #c8e0d0;border-radius:10px;background:#fff;color:#183c29;font:inherit;font-size:13px;line-height:1.5;resize:vertical}
+.qa-session-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.qa-session-button{padding:10px 12px;border:1px solid #c8e0d0;border-radius:10px;background:#fff;color:#267848;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.qa-session-button.primary{background:linear-gradient(120deg,#8df0ae,#35df7a);border-color:#3bb96c;color:#143b24}
+.qa-summary-output{margin-top:12px;padding:12px;border:1px solid #cfe5d7;border-radius:10px;background:#fff}
+.qa-summary-output h4{font-size:13px;margin:0 0 7px}.qa-summary-output p{font-size:12px;line-height:1.65;white-space:pre-line;margin:0;color:#435d4b}
+.qa-session-privacy{font-size:11px;line-height:1.5;color:#718276;margin:10px 0 0}
+@media(max-width:420px){.qa-session{padding:11px}.qa-session-head h3{font-size:16px}.qa-session-actions{display:grid;grid-template-columns:1fr 1fr}.qa-session-button{padding:10px 7px}}

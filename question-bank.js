@@ -1,4 +1,4 @@
-/* Z7 Integrated Call Workflow Q&A v3.6 — smart branching, trilingual */
+/* Z7 Integrated Call Workflow Q&A v3.7 — session progress and summary, trilingual */
 (() => {
   if (document.querySelector(".qa-bank")) return;
   const items = [
@@ -649,11 +649,97 @@
         <div class="qa-suggested-list" data-qa="suggested-list"></div>
       </div>
     </div>
+    <section class="qa-session" aria-label="Call progress and summary">
+      <div class="qa-session-head">
+        <div><p class="qa-subtitle" data-qa="session-eyebrow"></p><h3 data-qa="session-title"></h3></div>
+        <span class="qa-session-count" data-qa="session-count">0</span>
+      </div>
+      <div class="qa-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-qa="progress-track">
+        <span data-qa="progress-fill"></span>
+      </div>
+      <p class="qa-progress-label" data-qa="progress-label"></p>
+      <label class="qa-session-notes-label" for="z7-call-notes" data-qa="notes-label"></label>
+      <textarea id="z7-call-notes" data-qa="session-notes" rows="3" maxlength="1200"></textarea>
+      <div class="qa-session-actions">
+        <button type="button" class="qa-session-button primary" data-qa="build-summary"></button>
+        <button type="button" class="qa-session-button" data-qa="reset-session"></button>
+      </div>
+      <article class="qa-summary-output" data-qa="summary-output" hidden aria-live="polite">
+        <h4 data-qa="summary-heading"></h4>
+        <p data-qa="summary-text"></p>
+      </article>
+      <p class="qa-session-privacy" data-qa="session-privacy"></p>
+    </section>
     <p class="qa-note" data-qa="note"></p>`;
   flow.append(section);
   const $ = key => section.querySelector(`[data-qa="${key}"]`);
   const search = $("search"), category = $("category"), list = $("list");
   let selected = null;
+  const session = { questions: [], reactions: [], lastQuestion: null, lastReaction: null };
+  const sessionText = {
+    en: {
+      eyebrow:"CALL PROGRESS", title:"Session summary", notes:"Agent notes (avoid sensitive data)", notesPlaceholder:"Briefly note the issue, confirmed steps and agreed follow-up. Do not enter passwords, OTPs, PINs or full bank details.",
+      build:"Prepare summary", reset:"Reset session", summary:"Call summary", privacy:"Session notes stay in this page session; they are not sent to a server by this feature.",
+      progress:(n)=>`${n} unique question${n===1?"":"s"} marked in this session. This is a progress aid, not a call-duration target.`,
+      count:(n)=>`${n} covered`, none:"No questions recorded yet. Select a question and the customer's reaction to track the conversation.",
+      ended:"Customer ended the call", decline:"Customer not interested", answered:"Understood / resolved", followup:"Still has a question", escalate:"Needs escalation", callback:"Busy / callback",
+      summaryBody:(questions,reaction,notes)=>`Topics covered: ${questions || "None recorded"}\nLast customer response: ${reaction || "Not selected"}\nAgent notes: ${notes || "No notes entered"}\nNext step: follow the approved process; do not promise an unverified result or deadline.`,
+      resetConfirm:"Reset this session's local progress and notes?"
+    },
+    hi: {
+      eyebrow:"कॉल प्रगति", title:"सेशन सारांश", notes:"एजेंट नोट्स (संवेदनशील जानकारी न लिखें)", notesPlaceholder:"समस्या, पुष्टि किए गए कदम और तय फॉलो-अप संक्षेप में लिखें। पासवर्ड, OTP, PIN या पूरी बैंक जानकारी न लिखें।",
+      build:"सारांश तैयार करें", reset:"सेशन रीसेट", summary:"कॉल सारांश", privacy:"इस सुविधा में नोट्स इसी पेज सेशन में रहते हैं; इन्हें सर्वर पर नहीं भेजा जाता।",
+      progress:(n)=>`इस सेशन में ${n} अलग सवाल दर्ज हुए। यह प्रगति देखने का साधन है, कॉल की अवधि का लक्ष्य नहीं।`,
+      count:(n)=>`${n} कवर हुए`, none:"अभी कोई सवाल रिकॉर्ड नहीं हुआ। बातचीत ट्रैक करने के लिए सवाल और ग्राहक की प्रतिक्रिया चुनें।",
+      ended:"ग्राहक ने कॉल समाप्त की", decline:"ग्राहक की रुचि नहीं है", answered:"समझ गए / समाधान मिला", followup:"अभी भी सवाल है", escalate:"एस्केलेशन चाहिए", callback:"व्यस्त / बाद में कॉल",
+      summaryBody:(questions,reaction,notes)=>`कवर किए गए विषय: ${questions || "कोई रिकॉर्ड नहीं"}\nग्राहक की आखिरी प्रतिक्रिया: ${reaction || "चयन नहीं हुआ"}\nएजेंट नोट्स: ${notes || "नोट्स नहीं लिखे"}\nअगला कदम: स्वीकृत प्रक्रिया अपनाएँ; बिना पुष्टि परिणाम या समय-सीमा का वादा न करें।`,
+      resetConfirm:"क्या इस सेशन की स्थानीय प्रगति और नोट्स रीसेट करें?"
+    },
+    hinglish: {
+      eyebrow:"CALL PROGRESS", title:"Session summary", notes:"Agent notes (sensitive details na likhein)", notesPlaceholder:"Issue, confirmed steps aur agreed follow-up short mein note karein. Password, OTP, PIN ya full bank details na likhein.",
+      build:"Summary banayein", reset:"Session reset", summary:"Call summary", privacy:"Is feature mein notes isi page session mein rehte hain; server par send nahi hote.",
+      progress:(n)=>`Is session mein ${n} unique questions record hue. Yeh progress aid hai, call duration ka target nahi.`,
+      count:(n)=>`${n} covered`, none:"Abhi koi question record nahi hua. Conversation track karne ke liye question aur customer reaction select karein.",
+      ended:"Customer ne call end ki", decline:"Customer interested nahi hai", answered:"Samajh gaye / solve ho gaya", followup:"Abhi bhi question hai", escalate:"Escalation chahiye", callback:"Busy / callback",
+      summaryBody:(questions,reaction,notes)=>`Covered topics: ${questions || "Koi record nahi"}\nCustomer ka last response: ${reaction || "Select nahi hua"}\nAgent notes: ${notes || "Notes nahi hain"}\nNext step: approved process follow karein; unverified result ya deadline promise na karein.`,
+      resetConfirm:"Kya is session ki local progress aur notes reset karne hain?"
+    }
+  };
+  const reactionNames = {
+    answered:["answered","answered"], followup:["followup","followup"], escalate:["escalate","escalate"],
+    callback:["callback","callback"], decline:["decline","decline"], ended:["ended","ended"]
+  };
+  function renderSessionProgress() {
+    const t = sessionText[lang] || sessionText.en;
+    const n = session.questions.length;
+    $("session-eyebrow").textContent = t.eyebrow;
+    $("session-title").textContent = t.title;
+    $("session-count").textContent = t.count(n);
+    $("progress-label").textContent = n ? t.progress(n) : t.none;
+    const percent = Math.min(100, Math.round(n / Math.max(1, items.length) * 100));
+    $("progress-fill").style.width = percent + "%";
+    $("progress-track").setAttribute("aria-valuenow", String(percent));
+    $("notes-label").textContent = t.notes;
+    $("session-notes").placeholder = t.notesPlaceholder;
+    $("build-summary").textContent = t.build;
+    $("reset-session").textContent = t.reset;
+    $("summary-heading").textContent = t.summary;
+    $("session-privacy").textContent = t.privacy;
+  }
+  function recordQuestion(item) {
+    if (!item) return;
+    session.lastQuestion = item;
+    if (!session.questions.some(q => q.id === item.id)) session.questions.push(item);
+    renderSessionProgress();
+  }
+  function recordReaction(key) {
+    if (!key || !selected) return;
+    recordQuestion(selected);
+    session.lastQuestion = selected;
+    session.lastReaction = key;
+    session.reactions.push({question: session.lastQuestion, key});
+    renderSessionProgress();
+  }
 
   categories.forEach(c => {
     const option = document.createElement("option");
@@ -723,6 +809,7 @@
     renderList();
     renderTimePlan();
     renderReactions();
+    renderSessionProgress();
   }
   const reactionWrap = $("next-step");
   const reactionButtons = [...section.querySelectorAll("[data-reaction]")];
@@ -733,6 +820,7 @@
       const key = button.dataset.reaction;
       button.textContent = t.reactions[key];
       button.onclick = () => {
+        recordReaction(key);
         $("guidance").textContent = t.guidance[key];
         reactionButtons.forEach(b => b.classList.toggle("active", b === button));
         renderSuggestions(key);
@@ -782,6 +870,24 @@
     wrap.hidden = false;
   }
 
+  $("build-summary").addEventListener("click", () => {
+    const t = sessionText[lang] || sessionText.en;
+    const topics = session.questions.map(q => q.q[lang]).join(" · ");
+    const reaction = session.lastReaction ? (t[session.lastReaction] || session.lastReaction) : "";
+    $("summary-text").textContent = t.summaryBody(topics, reaction, $("session-notes").value.trim());
+    $("summary-output").hidden = false;
+  });
+  $("reset-session").addEventListener("click", () => {
+    const t = sessionText[lang] || sessionText.en;
+    if (!window.confirm(t.resetConfirm)) return;
+    session.questions.length = 0;
+    session.reactions.length = 0;
+    session.lastQuestion = null;
+    session.lastReaction = null;
+    $("session-notes").value = "";
+    $("summary-output").hidden = true;
+    renderSessionProgress();
+  });
   search.addEventListener("input", renderList);
   category.addEventListener("change", renderList);
   document.querySelector("#flow-language")?.addEventListener("change", event => {
