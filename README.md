@@ -1,4 +1,4 @@
-# Z7 Customer Support Assistant v2.3
+# Z7 Customer Support Assistant v2.4
 
 A mobile-friendly support guide with selectable response templates.
 
@@ -19,8 +19,14 @@ Open `index.html` in a browser. For service-worker and installable PWA features,
 Never ask customers to share passwords, OTPs, recovery codes, or full payment credentials. Verify requests through official channels.
 
 
-## v2.3
+## v2.4
 - Consistent version labels
 - Persistent unique-topic statistics
 - Separate recent-topic history (up to three topics)
 - Clear recent history without resetting viewing statistics
+
+
+## v2.4
+- Hindi/English interface toggle and Hindi support responses
+- Device-local favorite topics
+- Favorite, recent-history, and viewed-topic lists contain topic IDs only

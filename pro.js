@@ -33,7 +33,7 @@
   dashboard.innerHTML = `
     <div class="pro-heading">
       <div><p class="eyebrow">YOUR WORKSPACE</p><h2>Support Dashboard</h2></div>
-      <span class="pro-version">PRO · 2.3</span>
+      <span class="pro-version">PRO · 2.4</span>
     </div>
     <div class="pro-stats">
       <div class="pro-stat"><span>Total topics</span><strong>6</strong></div>
