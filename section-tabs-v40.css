@@ -1,0 +1,11 @@
+/* v4.0 nested section tabs — additive styles */
+.workspace-subnav{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:6px;margin:10px 0 12px;padding:5px;border:1px solid #cfe8d7;border-radius:13px;background:#ffffffed;box-shadow:0 3px 12px #174b2608}
+.workspace-subtab{min-width:0;min-height:38px;padding:8px 7px;border:1px solid transparent;border-radius:9px;background:transparent;color:#587062;font:inherit;font-size:12px;font-weight:750;cursor:pointer}
+.workspace-subtab.active{background:linear-gradient(135deg,#e6fff0,#c9f8d8);border-color:#8be0a9;color:#08632e}
+.workspace-subtab:focus-visible{outline:3px solid #18b95d55;outline-offset:2px}
+.workspace-subpanel{min-width:0;animation:subpanel-in .14s ease-out}
+.workspace-subpanel[hidden]{display:none!important}
+@keyframes subpanel-in{from{opacity:.65;transform:translateY(2px)}to{opacity:1;transform:translateY(0)}}
+.qa-use-in-flow{display:inline-flex;align-items:center;justify-content:center;margin-top:10px;min-height:40px;padding:9px 12px;border:0;border-radius:10px;background:#0bb95b;color:#fff;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+@media(max-width:560px){.workspace-subnav{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;padding:4px}.workspace-subtab{font-size:11px;padding:8px 5px}}
+@media(prefers-reduced-motion:reduce){.workspace-subpanel{animation:none}}
