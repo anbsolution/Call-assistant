@@ -633,7 +633,7 @@
     <label class="qa-category-label"><span data-qa="category-label">Category</span><select data-qa="category"></select></label>
     <div class="qa-layout">
       <div class="qa-list-wrap"><p class="qa-subtitle" data-qa="question"></p><div class="qa-list" data-qa="list"></div><p class="qa-empty" data-qa="empty" hidden></p></div>
-      <article class="qa-answer"><p class="qa-subtitle" data-qa="answer"></p><h3 data-qa="answer-question"></h3><p data-qa="answer-text"></p></article>
+      <article class="qa-answer"><p class="qa-subtitle" data-qa="answer"></p><h3 data-qa="answer-question"></h3><p data-qa="answer-text"></p><button type="button" class="qa-use-in-flow" data-qa="use-in-flow">Use response in Call Flow</button></article>
     </div>
     <div class="qa-next-step" data-qa="next-step" hidden>
       <p class="qa-subtitle" data-qa="reaction-label"></p>
@@ -680,9 +680,12 @@
     </section>
     </details>
     <p class="qa-note" data-qa="note"></p>`;
+  // Q&A stays in Workspace, separate from the calling workflow.
+  const workspacePanel = document.querySelector('.workspace-view[data-panel="workspace"]');
+  if (workspacePanel) workspacePanel.append(section);
+  else document.querySelector("main")?.append(section);
+
   const flowOptions = flow.querySelector("#flow-options");
-  if (flowOptions) flowOptions.insertAdjacentElement("afterend", section);
-  else flow.append(section);
 
   const flowScript = flow.querySelector("#flow-script");
   const flowStep = flow.querySelector("#flow-step");
@@ -789,7 +792,7 @@
     $("answer-text").textContent = item ? item.a[lang] : "";
 
     if (flowScript) flowScript.textContent = item ? (item.a[lang] || item.a.en) : baseFlowText;
-    if (flowOptions) flowOptions.hidden = !!item;
+    if (flowOptions) flowOptions.hidden = false;
     if (flowStep) flowStep.textContent = item
       ? (lang === "hi" ? "कॉल स्क्रिप्ट · " : "Call Script · ") + item.q[lang]
       : baseFlowStep;
@@ -806,6 +809,12 @@
       $("suggested-list").replaceChildren();
     }
   }
+  const useInFlow = $("use-in-flow");
+  useInFlow?.addEventListener("click", () => {
+    const callTab = document.querySelector('.workspace-tab[data-view="call"]');
+    if (selected && callTab) callTab.click();
+  });
+
   const flowReset = flow.querySelector("#flow-reset");
   flowReset?.addEventListener("click", () => renderAnswer(null));
 
@@ -862,7 +871,7 @@
       flowScript.textContent = selected.a[lang] || selected.a.en;
       if (flowStep) flowStep.textContent =
         (lang === "hi" ? "कॉल स्क्रिप्ट · " : "Call Script · ") + selected.q[lang];
-      if (flowOptions) flowOptions.hidden = true;
+      if (flowOptions) flowOptions.hidden = false;
     }
   }
   const reactionWrap = $("next-step");
