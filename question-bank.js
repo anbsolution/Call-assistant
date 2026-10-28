@@ -789,11 +789,12 @@
     $("answer-text").textContent = item ? item.a[lang] : "";
 
     if (flowScript) flowScript.textContent = item ? (item.a[lang] || item.a.en) : baseFlowText;
+    if (flowOptions) flowOptions.hidden = !!item;
     if (flowStep) flowStep.textContent = item
       ? (lang === "hi" ? "कॉल स्क्रिप्ट · " : "Call Script · ") + item.q[lang]
       : baseFlowStep;
     if (flowPrompt) flowPrompt.textContent = item
-      ? (lang === "hi" ? "ग्राहक की प्रतिक्रिया चुनें" : lang === "hinglish" ? "Customer ka response chunein" : "Choose the customer’s response")
+      ? (lang === "hi" ? "नीचे ग्राहक की प्रतिक्रिया चुनें" : lang === "hinglish" ? "Neeche customer ka response chunein" : "Choose the customer’s response below")
       : baseFlowPrompt;
 
     section.querySelectorAll(".qa-item").forEach(b => b.classList.toggle("active", b.dataset.id === item?.id));
@@ -805,6 +806,9 @@
       $("suggested-list").replaceChildren();
     }
   }
+  const flowReset = flow.querySelector("#flow-reset");
+  flowReset?.addEventListener("click", () => renderAnswer(null));
+
   function renderList() {
     const query = search.value.trim().toLocaleLowerCase();
     const filtered = items.filter(item =>
@@ -854,6 +858,12 @@
     renderTimePlan();
     renderReactions();
     renderSessionProgress();
+    if (selected && flowScript) {
+      flowScript.textContent = selected.a[lang] || selected.a.en;
+      if (flowStep) flowStep.textContent =
+        (lang === "hi" ? "कॉल स्क्रिप्ट · " : "Call Script · ") + selected.q[lang];
+      if (flowOptions) flowOptions.hidden = true;
+    }
   }
   const reactionWrap = $("next-step");
   const reactionButtons = [...section.querySelectorAll("[data-reaction]")];
