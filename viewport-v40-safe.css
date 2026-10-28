@@ -5,8 +5,8 @@ html, body {
   min-height:100%;
 }
 body { margin:0; }
-body > header { position:sticky; top:0; z-index:20; }
-.workspace-nav { position:sticky!important; top:58px!important; z-index:19; }
+body > header { position:relative!important; top:auto!important; z-index:20; }
+.workspace-nav { position:sticky!important; top:0!important; z-index:19; }
 .workspace-view { min-width:0; }
 .workspace-tab { min-height:44px; font-size:14px; }
 .workspace-view > .welcome h2 { font-size:clamp(24px,4vw,32px)!important; line-height:1.2; }
@@ -26,7 +26,7 @@ body > header { position:sticky; top:0; z-index:20; }
 .qa-reaction,.qa-suggested-item,.qa-session-button { font-size:14px!important; line-height:1.45!important; }
 .support-shortcuts button { min-height:42px!important; font-size:14px!important; }
 @media(max-width:760px) {
-  .workspace-nav { top:55px!important; width:calc(100% - 16px); }
+  .workspace-nav { top:0!important; width:calc(100% - 16px); }
   .workspace-view > .topics { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .qa-layout { grid-template-columns:minmax(0,1fr)!important; }
   .qa-list { max-height:32vh; overflow:auto; }
