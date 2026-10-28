@@ -680,7 +680,16 @@
     </section>
     </details>
     <p class="qa-note" data-qa="note"></p>`;
-  flow.append(section);
+  const flowOptions = flow.querySelector("#flow-options");
+  if (flowOptions) flowOptions.insertAdjacentElement("afterend", section);
+  else flow.append(section);
+
+  const flowScript = flow.querySelector("#flow-script");
+  const flowStep = flow.querySelector("#flow-step");
+  const flowPrompt = flow.querySelector("#flow-prompt");
+  const baseFlowText = flowScript?.textContent || "";
+  const baseFlowStep = flowStep?.textContent || "";
+  const baseFlowPrompt = flowPrompt?.textContent || "";
   const $ = key => section.querySelector(`[data-qa="${key}"]`);
   const search = $("search"), category = $("category"), list = $("list");
   let selected = null;
@@ -778,6 +787,15 @@
     selected = item;
     $("answer-question").textContent = item ? item.q[lang] : ui[lang].select;
     $("answer-text").textContent = item ? item.a[lang] : "";
+
+    if (flowScript) flowScript.textContent = item ? (item.a[lang] || item.a.en) : baseFlowText;
+    if (flowStep) flowStep.textContent = item
+      ? (lang === "hi" ? "कॉल स्क्रिप्ट · " : "Call Script · ") + item.q[lang]
+      : baseFlowStep;
+    if (flowPrompt) flowPrompt.textContent = item
+      ? (lang === "hi" ? "ग्राहक की प्रतिक्रिया चुनें" : lang === "hinglish" ? "Customer ka response chunein" : "Choose the customer’s response")
+      : baseFlowPrompt;
+
     section.querySelectorAll(".qa-item").forEach(b => b.classList.toggle("active", b.dataset.id === item?.id));
     if ($("next-step")) {
       $("next-step").hidden = !item;

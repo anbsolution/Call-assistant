@@ -95,3 +95,33 @@
   .qa-answer { padding: 10px; }
   .qa-collapsible > summary { padding: 10px; }
 }
+
+/* Integrated Q&A calling workflow v4.0 */
+.call-flow > .qa-bank {
+  margin: 10px 0;
+  padding: 10px;
+  box-shadow: none;
+}
+.call-flow > .qa-bank .qa-head h2 {
+  font-size: 17px;
+}
+.call-flow > .qa-bank .qa-intro {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.call-flow > .qa-bank .qa-answer {
+  display: none !important;
+}
+.call-flow > .qa-bank .qa-list {
+  max-height: 145px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+@media (max-width: 560px) {
+  .call-flow > .qa-bank {
+    padding: 8px;
+  }
+  .call-flow > .qa-bank .qa-list {
+    max-height: 125px;
+  }
+}
