@@ -58,3 +58,40 @@
 .qa-timeline li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;padding:7px 8px;border-radius:8px;background:#f5fbf7;font-size:12px;line-height:1.45;color:#294d36}
 .qa-timeline time{font-size:11px;font-variant-numeric:tabular-nums;color:#688171}
 .qa-timeline p{margin:8px 0 0;font-size:11px;color:#718276}
+
+/* v3.9 mobile-first compact integrated call workflow */
+.qa-collapsible {
+  margin: 10px 0;
+  border: 1px solid #cfe5d7;
+  border-radius: 11px;
+  background: #f7fff9;
+}
+.qa-collapsible > summary {
+  padding: 11px 13px;
+  color: #245d3b;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.qa-collapsible[open] > summary {
+  border-bottom: 1px solid #dcece1;
+}
+.qa-collapsible > .qa-timeline,
+.qa-collapsible > .qa-session {
+  margin: 0;
+  border: 0;
+  border-radius: 0 0 11px 11px;
+  box-shadow: none;
+}
+.qa-bank { margin-top: 10px; padding: 12px; }
+.qa-intro { margin-bottom: 9px; }
+.qa-list { max-height: 190px; }
+.qa-answer { min-height: 0; }
+.qa-time-stages { gap: 6px; }
+.qa-time-stage { min-height: 60px; padding: 8px; }
+@media(max-width:560px) {
+  .qa-bank { padding: 10px; }
+  .qa-list { max-height: 160px; }
+  .qa-answer { padding: 10px; }
+  .qa-collapsible > summary { padding: 10px; }
+}

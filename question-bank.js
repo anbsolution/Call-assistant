@@ -622,11 +622,13 @@
       <span class="qa-count" data-qa="count"></span>
     </div>
 
+    <details class="qa-collapsible"><summary>Guided 60-minute call plan</summary>
     <section class="qa-timeline" aria-label="60-minute guided call plan">
       <div class="qa-timeline-head"><div><p class="qa-subtitle" data-qa="time-eyebrow"></p><h3 data-qa="time-title"></h3></div><span class="qa-time-note" data-qa="time-note"></span></div>
       <div class="qa-time-stages" data-qa="time-stages"></div>
       <p class="qa-guidance" data-qa="time-guidance" aria-live="polite"></p>
     </section>
+    </details>
     <label class="qa-search-label"><span aria-hidden="true">⌕</span><input type="search" data-qa="search" autocomplete="off"></label>
     <label class="qa-category-label"><span data-qa="category-label">Category</span><select data-qa="category"></select></label>
     <div class="qa-layout">
@@ -649,6 +651,7 @@
         <div class="qa-suggested-list" data-qa="suggested-list"></div>
       </div>
     </div>
+    <details class="qa-collapsible qa-session-collapse"><summary>Call progress &amp; session summary</summary>
     <section class="qa-session" aria-label="Call progress and summary">
       <div class="qa-session-head">
         <div><p class="qa-subtitle" data-qa="session-eyebrow"></p><h3 data-qa="session-title"></h3></div>
@@ -675,6 +678,7 @@
       </article>
       <p class="qa-session-privacy" data-qa="session-privacy"></p>
     </section>
+    </details>
     <p class="qa-note" data-qa="note"></p>`;
   flow.append(section);
   const $ = key => section.querySelector(`[data-qa="${key}"]`);
